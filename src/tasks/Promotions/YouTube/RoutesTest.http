@@ -1,0 +1,21 @@
+curl -X POST http://localhost:3000/youtube/notification -H 'content-type: text/xml' 
+-d '<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015"
+         xmlns="http://www.w3.org/2005/Atom">
+  <link rel="hub" href="https://pubsubhubbub.appspot.com"/>
+  <link rel="self" href="https://www.youtube.com/xml/feeds/videos.xml?channel_id=UCGDjpwZV-bU-sLSnhInCfKQ"/>
+  <title>YouTube video feed</title>
+  <updated>2015-04-01T19:05:24.552394234+00:00</updated>
+  <entry>
+    <id>yt:video:zD2fc4aWgoI</id>
+    <yt:videoId>zD2fc4aWgoI</yt:videoId>
+    <yt:channelId>UCGDjpwZV-bU-sLSnhInCfKQ</yt:channelId>
+    <title>Satoshi Stacker</title>
+    <link rel="alternate" href="http://www.youtube.com/watch?v=zD2fc4aWgoI"/>
+    <author>
+     <name>Satoshi Stacker</name>
+     <uri>http://www.youtube.com/channel/UCGDjpwZV-bU-sLSnhInCfKQ</uri>
+    </author>
+    <published>2015-03-06T21:40:57+00:00</published>
+    <updated>2015-03-09T19:05:24.552394234+00:00</updated>
+  </entry>
+</feed>'
