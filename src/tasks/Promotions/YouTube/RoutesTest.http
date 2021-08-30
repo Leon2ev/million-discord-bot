@@ -1,4 +1,4 @@
-curl -X POST http://localhost:3000/youtube -H 'content-type: text/xml' 
+curl -X POST http://localhost:3000/youtube/notification -H 'content-type: text/xml' 
 -d '<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015"
          xmlns="http://www.w3.org/2005/Atom">
   <link rel="hub" href="https://pubsubhubbub.appspot.com"/>

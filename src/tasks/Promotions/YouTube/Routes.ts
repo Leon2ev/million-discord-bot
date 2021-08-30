@@ -3,11 +3,11 @@ import { channelIds } from "../../../channel-IDs";
 
 export const youtube = express.Router();
 
-youtube.get('/', ({ query: { 'hub.challenge': challenge } }, res) => {
+youtube.get('/notification', ({ query: { 'hub.challenge': challenge } }, res) => {
   res.status(200).end(challenge);
 });
 
-youtube.post('/', ({ body, app }, res) => {
+youtube.post('/notification', ({ body, app }, res) => {
   try {
     const publications = body.feed.entry;
     
@@ -33,13 +33,9 @@ youtube.post('/', ({ body, app }, res) => {
   
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     publications.forEach(async (pub: any) => {
-      const { title, videoUrl, publishedDate, updatedDate } = parsePublications(pub);
+      const { title, videoUrl } = parsePublications(pub);
       const { youTubePromotion } = channelIds;
-      const pubDate = new Date(publishedDate);
-      const upDate = new Date(updatedDate);
-      const isRelease = pubDate === upDate;
-      const msgTitle = isRelease ? `${title} released new video!!` : `${title} updated the video!!`;
-
+      
       try {
         const discordChannel = discordClient.channels.cache.get(youTubePromotion);
   
@@ -47,9 +43,7 @@ youtube.post('/', ({ body, app }, res) => {
           throw new Error(`Could not find channel with ID: ${youTubePromotion}`);
         }
         
-        const msg = `${msgTitle}\n` +
-                    `Published: ${pubDate.toLocaleString('en-GB', { timeZone: 'UTC', timeZoneName: 'short' })}\n` +
-                    `Updated: ${upDate.toLocaleString('en-GB', { timeZone: 'UTC', timeZoneName: 'short' })}\n` +
+        const msg = `${title} released new video!!\n` +
                     `${videoUrl}`;
 
         await discordChannel.send(msg);
