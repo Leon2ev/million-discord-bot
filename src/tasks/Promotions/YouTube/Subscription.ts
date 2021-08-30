@@ -14,13 +14,13 @@ export class YouTubeSubscription {
           message: 'Subscription will work only on production environment'
         }
       }
-      const callbackUrl = `https://${this.hostname}/youtube/notification`;
+      const callbackUrl = `https://${this.hostname}/youtube`;
     
       const form = new FormData();
     
       form.append('hub.callback', callbackUrl);
       form.append('hub.topic', this.topicUrl + channelId);
-      form.append('hub.verify', 'async');
+      // form.append('hub.verify', 'async');
       form.append('hub.mode', mode);
     
       return await nodeFetch(this.pshbUrl, {
