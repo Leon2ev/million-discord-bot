@@ -20,7 +20,7 @@ export class YouTubeSubscription {
     
       form.append('hub.callback', callbackUrl);
       form.append('hub.topic', this.topicUrl + channelId);
-      // form.append('hub.verify', 'async');
+      form.append('hub.verify', 'async');
       form.append('hub.mode', mode);
     
       return await nodeFetch(this.pshbUrl, {
