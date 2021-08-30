@@ -3,11 +3,11 @@ import { channelIds } from "../../../channel-IDs";
 
 export const youtube = express.Router();
 
-youtube.get('/', ({ query: { 'hub.challenge': challenge } }, res) => {
+youtube.get('/notification', ({ query: { 'hub.challenge': challenge } }, res) => {
   res.status(200).end(challenge);
 });
 
-youtube.post('/', ({ body, app }, res) => {
+youtube.post('/notification', ({ body, app }, res) => {
   try {
     const publications = body.feed.entry;
     
