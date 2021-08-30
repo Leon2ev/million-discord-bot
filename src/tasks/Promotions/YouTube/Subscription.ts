@@ -14,13 +14,9 @@ export class YouTubeSubscription {
           message: 'Subscription will work only on production environment'
         }
       }
-      const callbackUrl = `https://${this.hostname}/youtube/notification`;
+      const callbackUrl = `https://${this.hostname}/youtube`;
     
       const form = new FormData();
-
-      console.log(mode)
-      console.log(this.topicUrl + channelId)
-      console.log(callbackUrl)
     
       form.append('hub.callback', callbackUrl);
       form.append('hub.topic', this.topicUrl + channelId);
