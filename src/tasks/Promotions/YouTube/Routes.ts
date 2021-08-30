@@ -8,6 +8,7 @@ youtube.get('/', ({ query: { 'hub.challenge': challenge } }, res) => {
 });
 
 youtube.post('/', ({ body, app }, res) => {
+  console.log(body.feed.entry)
   try {
     const publications = body.feed.entry;
     
@@ -33,9 +34,13 @@ youtube.post('/', ({ body, app }, res) => {
   
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     publications.forEach(async (pub: any) => {
-      const { title, videoUrl } = parsePublications(pub);
+      const { title, videoUrl, publishedDate, updatedDate } = parsePublications(pub);
       const { youTubePromotion } = channelIds;
-      
+      const pubDate = new Date(publishedDate);
+      const upDate = new Date(updatedDate);
+      const isRelease = pubDate === upDate;
+      const msgTitle = isRelease ? `${title} released new video!!` : `${title} updated the video!!`;
+
       try {
         const discordChannel = discordClient.channels.cache.get(youTubePromotion);
   
@@ -43,7 +48,9 @@ youtube.post('/', ({ body, app }, res) => {
           throw new Error(`Could not find channel with ID: ${youTubePromotion}`);
         }
         
-        const msg = `${title} released new video!!\n` +
+        const msg = `${msgTitle}\n` +
+                    `Published: ${pubDate.toLocaleString('en-GB', { timeZone: 'UTC', timeZoneName: 'short' })}\n` +
+                    `Updated: ${upDate.toLocaleString('en-GB', { timeZone: 'UTC', timeZoneName: 'short' })}\n` +
                     `${videoUrl}`;
 
         await discordChannel.send(msg);
