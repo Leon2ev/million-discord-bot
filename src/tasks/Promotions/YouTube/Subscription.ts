@@ -14,7 +14,7 @@ export class YouTubeSubscription {
       
       const pshbUrl = 'https://pubsubhubbub.appspot.com';
       const topicUrl = 'https://www.youtube.com/xml/feeds/videos.xml?channel_id=';
-      const callbackUrl = `https://youtube-notification-test-app.herokuapp.com/youtube/notification`;
+      const callbackUrl = `https://youtube-notification-test.herokuapp.com/youtube/notification`;
     
       const form = new FormData();
     
