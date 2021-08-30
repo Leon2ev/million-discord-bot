@@ -8,13 +8,11 @@ youtube.get('/', ({ query: { 'hub.challenge': challenge } }, res) => {
 });
 
 youtube.post('/', ({ body, app }, res) => {
-  console.log(body)
   try {
     const publications = body.feed.entry;
     
     if (!publications) {
-      // throw new Error('Request without publication');
-      res.status(200).end(body.challenge);
+      throw new Error('Request without publication');
     };
     
     const discordClient = app.get('discordClient');

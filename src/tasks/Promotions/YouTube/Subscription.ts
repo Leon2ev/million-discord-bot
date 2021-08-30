@@ -14,7 +14,7 @@ export class YouTubeSubscription {
           message: 'Subscription will work only on production environment'
         }
       }
-      const callbackUrl = `https://${this.hostname}/youtube/notification`;
+      const callbackUrl = `https://${this.hostname}/youtube`;
     
       const form = new FormData();
     
