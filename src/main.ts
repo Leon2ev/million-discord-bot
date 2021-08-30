@@ -28,7 +28,7 @@ class Main {
 
     // Middlewares
     app.use(Express.json())
-    app.use(Express.urlencoded());
+    app.use(Express.urlencoded({ extended: true }));
     app.use(xmlparser());
 
     // Routes
