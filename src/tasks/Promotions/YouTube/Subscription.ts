@@ -4,17 +4,16 @@ import * as FormData from 'form-data';
 export class YouTubeSubscription {
   static pshbUrl = 'https://pubsubhubbub.appspot.com';
   static topicUrl = 'https://www.youtube.com/xml/feeds/videos.xml?channel_id=';
-  static hostname = process.env.HOSTNAME;
 
   static async sendPshbRequest(channelId: string, mode: string): Promise<Response | void>{
     try {
-      if (!this.hostname) {
+      if (process.env.NODE_ENV !== 'production') {
         throw {
           title: 'PubSubHubBub Error',
           message: 'Subscription will work only on production environment'
         }
       }
-      const callbackUrl = `https://${this.hostname}/youtube/notification`;
+      const callbackUrl = `https://youtube-notification-test-app.herokuapp.com/youtube/notification`;
     
       const form = new FormData();
     
